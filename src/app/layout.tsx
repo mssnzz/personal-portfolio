@@ -20,19 +20,57 @@ const caveat = Caveat({
   weight: ["500", "600"],
 });
 
+/** Canonical origin. Everything relative in the metadata below resolves
+ *  against it, including the generated OG image, which social crawlers will
+ *  only fetch as an absolute URL. */
+export const siteUrl = "https://www.manuelsanchez.io";
+
+const title = "Manuel Sanchez — Fullstack Developer & QA";
+const description =
+  "Fullstack developer: five years shipping and maintaining production React and Node applications, with a parallel QA track — defect triage across iOS, Android and web, and Playwright suites running in CI. Santo Domingo, open to remote.";
+
 export const metadata: Metadata = {
-  icons: {
-    icon: "/favicon.svg",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: title,
+    // Sub-pages set their own title and get the name appended.
+    template: "%s — Manuel Sanchez",
   },
-  title: "Manuel Sanchez — Technical Support Engineer",
-  description:
-    "Five years of bilingual L1/L2 technical support across consumer apps, devices and 300-user corporate environments, with a parallel web development track. Open to remote roles.",
+  description,
+  alternates: { canonical: "/" },
+  authors: [{ name: "Manuel Sanchez", url: siteUrl }],
+  creator: "Manuel Sanchez",
+  keywords: [
+    "fullstack developer",
+    "react",
+    "next.js",
+    "node.js",
+    "typescript",
+    "qa engineer",
+    "playwright",
+    "cypress",
+    "remote",
+    "Santo Domingo",
+    "Dominican Republic",
+  ],
+  icons: { icon: "/favicon.svg" },
   openGraph: {
-    title: "Manuel Sanchez — Technical Support Engineer",
-    description:
-      "Bilingual L1/L2 support with a development background. Open to remote roles, US Eastern hours.",
     type: "profile",
+    url: siteUrl,
+    siteName: "Manuel Sanchez",
+    title,
+    description,
     locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
 };
 

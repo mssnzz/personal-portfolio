@@ -1,6 +1,11 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import {
+  useState,
+  useCallback,
+  useEffect,
+  useSyncExternalStore,
+} from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
@@ -12,6 +17,28 @@ const defaultNavLinks = [
   { label: "Proceso", href: "#proceso" },
   { label: "Contacto", href: "#contacto" },
 ];
+
+/** Never changes, so React never resubscribes. */
+const noopSubscribe = () => () => {};
+
+/**
+ * False while rendering on the server and through the first client render,
+ * true afterwards.
+ *
+ * The theme is unknowable on the server, so the toggle has to hold a
+ * placeholder until hydration or the markup will not match. The usual
+ * `useEffect(() => setMounted(true))` does that with a state write during an
+ * effect, which schedules a second render pass for something React can answer
+ * directly: `useSyncExternalStore` takes a separate server snapshot, so the
+ * two renders differ without a re-render being queued.
+ */
+function useHydrated() {
+  return useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false,
+  );
+}
 
 /** `external` links leave the site: they open in a new tab and carry a ↗. */
 type NavLink = { label: string; href: string; external?: boolean };
@@ -125,12 +152,10 @@ export function Header({
   bordered?: boolean;
 } = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const activeHref = useActiveSection(navLinks);
   const reduceMotion = useReducedMotion();
-
-  useEffect(() => setMounted(true), []);
+  const mounted = useHydrated();
 
   const toggleTheme = useCallback(() => {
     const next = theme === "dark" ? "light" : "dark";

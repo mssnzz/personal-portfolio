@@ -10,7 +10,7 @@ const projects = [
     description:
       "Plataforma de telemedicina con videollamadas, historial médico y gestión de citas.",
     url: "https://doktap.com",
-    screenshot: "/screenshots/doktap.png",
+    screenshot: "/screenshots/doktap.webp",
   },
   {
     title: "Nomi",
@@ -18,7 +18,7 @@ const projects = [
     description:
       "Sistema de agendamiento para negocios con reservas online y recordatorios automáticos.",
     url: "https://nomi.do",
-    screenshot: "/screenshots/nomi.png",
+    screenshot: "/screenshots/nomi.webp",
   },
   {
     title: "Farach",
@@ -26,7 +26,7 @@ const projects = [
     description:
       "E-commerce de insumos y equipos odontológicos con catálogo, cotizaciones y pedidos.",
     url: "https://farachdental.com",
-    screenshot: "/screenshots/farach.png",
+    screenshot: "/screenshots/farach.webp",
   },
   {
     title: "Kalenday",
@@ -34,7 +34,7 @@ const projects = [
     description:
       "Plataforma de agendamiento y gestión de calendario para profesionales y equipos.",
     url: "https://kalenday.com",
-    screenshot: "/screenshots/kalenday.png",
+    screenshot: "/screenshots/kalenday.webp",
   },
   {
     title: "Clix Solution",
@@ -42,7 +42,7 @@ const projects = [
     description:
       "Soluciones tecnológicas y consultoría digital para empresas en crecimiento.",
     url: "https://clixsolution.net",
-    screenshot: "/screenshots/clixsolution.png",
+    screenshot: "/screenshots/clixsolution.webp",
   },
   {
     title: "Scrum Clix",
@@ -50,7 +50,7 @@ const projects = [
     description:
       "Plataforma de certificación Scrum Master con formación práctica y certificación internacional.",
     url: "https://scrum.clixsolution.consulting",
-    screenshot: "/screenshots/scrum-clix.png",
+    screenshot: "/screenshots/scrum-clix.webp",
   },
   {
     title: "ARS Abel González",
@@ -58,7 +58,7 @@ const projects = [
     description:
       "Portal para aseguradora: cobertura, red de prestadores y autorizaciones online.",
     url: "https://arsabelgonzalez.com",
-    screenshot: "/screenshots/arsabelgonzalez.png",
+    screenshot: "/screenshots/arsabelgonzalez.webp",
   },
   {
     title: "ARS Banco Central",
@@ -66,7 +66,7 @@ const projects = [
     description:
       "Portal web institucional para la ARS del Banco Central de la República Dominicana.",
     url: "https://arsbancocentral.org.do",
-    screenshot: "/screenshots/arsbancocentral.png",
+    screenshot: "/screenshots/arsbancocentral.webp",
   },
   {
     title: "Strongcare",
@@ -74,7 +74,7 @@ const projects = [
     description:
       "Plataforma e-commerce de equipos médicos con catálogo, cotizaciones y blog.",
     url: "https://strongcarerd.com",
-    screenshot: "/screenshots/strongcare.png",
+    screenshot: "/screenshots/strongcare.webp",
   },
   {
     title: "Opensoft",
@@ -82,7 +82,7 @@ const projects = [
     description:
       "Sitio web corporativo para empresa de software con soluciones empresariales.",
     url: "https://opensoftdo.com",
-    screenshot: "/screenshots/opensoft.png",
+    screenshot: "/screenshots/opensoft.webp",
   },
   {
     title: "GetWell RD",
@@ -90,7 +90,7 @@ const projects = [
     description:
       "Plataforma de servicios de salud con agendamiento de citas y directorio médico.",
     url: "https://getwellrd.com",
-    screenshot: "/screenshots/getwellrd.png",
+    screenshot: "/screenshots/getwellrd.webp",
   },
   {
     title: "Jubatus Enterprises",
@@ -98,7 +98,7 @@ const projects = [
     description:
       "Sitio web corporativo para empresa de tecnología y transformación digital.",
     url: "https://jubatusenterprises.com",
-    screenshot: "/screenshots/jubatus.png",
+    screenshot: "/screenshots/jubatus.webp",
   },
 ];
 

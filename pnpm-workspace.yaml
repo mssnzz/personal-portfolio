@@ -1,3 +1,12 @@
-ignoredBuiltDependencies:
+# Build scripts are opt-in since pnpm 10. Declared here so a fresh clone
+# installs without prompting and without running anything unreviewed.
+onlyBuiltDependencies:
+  # Native image pipeline used by next/image when self-hosting.
   - sharp
+  # Native binding for the ESLint import resolver.
   - unrs-resolver
+
+ignoredBuiltDependencies:
+  # Pulled in by the shadcn CLI. Its postinstall drops a mock service worker
+  # into public/, which this project has no use for.
+  - msw

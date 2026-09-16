@@ -122,7 +122,7 @@ export const product = {
   title: "Kalenday",
   tagline: "The product I build and maintain",
   url: "https://kalenday.com",
-  screenshot: "/screenshots/kalenday.png",
+  screenshot: "/screenshots/kalenday.webp",
   description:
     "An AI communication platform: agents that answer, qualify and book customers across WhatsApp, Instagram, email and SMS, in a single inbox. A React single-page app over a Node backend, with channel integrations that have to stay up because real conversations run through them.",
   facts: [
@@ -178,7 +178,7 @@ export const projects: {
     description:
       "Telemedicine platform with video consultations, medical history and appointment management.",
     url: "https://doktap.com",
-    screenshot: "/screenshots/doktap.png",
+    screenshot: "/screenshots/doktap.webp",
     logo: "/logos/doktap-mark.png",
   },
   {
@@ -187,7 +187,7 @@ export const projects: {
     description:
       "Dental supplies and equipment store with catalogue, quote requests and ordering.",
     url: "https://farachdental.com",
-    screenshot: "/screenshots/farach.png",
+    screenshot: "/screenshots/farach.webp",
     logo: "/logos/farach.png",
     logoFilter: "grayscale(1) invert(1)",
   },
@@ -197,7 +197,7 @@ export const projects: {
     description:
       "Booking system for small businesses with online reservations and automated reminders.",
     url: "https://nomi.do",
-    screenshot: "/screenshots/nomi.png",
+    screenshot: "/screenshots/nomi.webp",
     logo: "/logos/nomi.png",
   },
   {
@@ -206,7 +206,7 @@ export const projects: {
     description:
       "Public portal for the life-assurance programme of the Central Bank of the Dominican Republic.",
     url: "https://arsbancocentral.org.do",
-    screenshot: "/screenshots/arsbancocentral.png",
+    screenshot: "/screenshots/arsbancocentral.webp",
     logo: "/logos/arsbancocentral.png",
   },
   {
@@ -215,7 +215,7 @@ export const projects: {
     description:
       "Insurance provider portal: coverage, affiliated provider network and online authorisations.",
     url: "https://arsabelgonzalez.com",
-    screenshot: "/screenshots/arsabelgonzalez.png",
+    screenshot: "/screenshots/arsabelgonzalez.webp",
     logo: "/logos/arsabelgonzalez.png",
   },
   {
@@ -224,7 +224,7 @@ export const projects: {
     description:
       "Health services platform with appointment booking and a medical provider directory.",
     url: "https://getwellrd.com",
-    screenshot: "/screenshots/getwellrd.png",
+    screenshot: "/screenshots/getwellrd.webp",
   },
   {
     title: "Strongcare",
@@ -232,7 +232,7 @@ export const projects: {
     description:
       "Medical equipment e-commerce platform with catalogue, quote requests and blog.",
     url: "https://strongcarerd.com",
-    screenshot: "/screenshots/strongcare.png",
+    screenshot: "/screenshots/strongcare.webp",
     logo: "/logos/strongcare.png",
   },
   {
@@ -241,7 +241,7 @@ export const projects: {
     description:
       "Technology solutions and digital consulting site for growing companies.",
     url: "https://clixsolution.net",
-    screenshot: "/screenshots/clixsolution.png",
+    screenshot: "/screenshots/clixsolution.webp",
     logo: "/logos/clixsolution.png",
   },
   {
@@ -250,7 +250,7 @@ export const projects: {
     description:
       "Scrum Master certification platform with hands-on training and international certification.",
     url: "https://scrum.clixsolution.consulting",
-    screenshot: "/screenshots/scrum-clix.png",
+    screenshot: "/screenshots/scrum-clix.webp",
   },
   {
     title: "Jubatus Enterprises",
@@ -258,7 +258,7 @@ export const projects: {
     description:
       "Corporate site for a technology and digital transformation company.",
     url: "https://jubatusenterprises.com",
-    screenshot: "/screenshots/jubatus.png",
+    screenshot: "/screenshots/jubatus.webp",
     logo: "/logos/jubatus-mark.png",
   },
   {
@@ -267,7 +267,7 @@ export const projects: {
     description:
       "Corporate website for an enterprise software company.",
     url: "https://opensoftdo.com",
-    screenshot: "/screenshots/opensoft.png",
+    screenshot: "/screenshots/opensoft.webp",
     logo: "/logos/opensoft.png",
     logoFilter: "invert(1)",
   },
