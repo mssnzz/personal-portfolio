@@ -1,12 +1,11 @@
-# Build scripts are opt-in since pnpm 10. Declared here so a fresh clone
-# installs without prompting and without running anything unreviewed.
-onlyBuiltDependencies:
-  # Native image pipeline used by next/image when self-hosting.
-  - sharp
+# Build scripts are opt-in since pnpm 10: each package that wants to run one
+# has to be answered here, or a fresh install stops and asks. Declared so a
+# clone (and CI) installs unattended, with nothing unreviewed running.
+allowBuilds:
+  # Native image pipeline behind next/image when self-hosting.
+  sharp: true
   # Native binding for the ESLint import resolver.
-  - unrs-resolver
-
-ignoredBuiltDependencies:
+  unrs-resolver: true
   # Pulled in by the shadcn CLI. Its postinstall drops a mock service worker
   # into public/, which this project has no use for.
-  - msw
+  msw: false
