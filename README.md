@@ -1,12 +1,14 @@
 # manuelsanchez.io
 
+[![CI](https://github.com/mssnzz/personal-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/mssnzz/personal-portfolio/actions/workflows/ci.yml)
+
 Personal site of Manuel Sanchez — fullstack developer, Santo Domingo (UTC−4).
 Two audiences, two routes, one codebase and one design system.
 
 - **`/`** — developer portfolio (English), aimed at remote engineering hiring.
 - **`/servicios`** — web-design agency landing (Spanish), for local clients.
 
-**Live:** [manuelsanchez-io.vercel.app](https://manuelsanchez-io.vercel.app)
+**Live:** [manuelsanchez.io](https://www.manuelsanchez.io)
 
 ## Stack
 
@@ -30,7 +32,29 @@ pnpm dev          # http://localhost:3000
 pnpm build        # production build
 pnpm start        # serve the build
 pnpm lint         # eslint
+pnpm typecheck    # tsc --noEmit
+pnpm test         # Playwright, against a production build
+pnpm test:ui      # the same suite, in Playwright's UI mode
 ```
+
+## Tests
+
+`pnpm test` builds the site, serves it with `next start` and runs the suite
+against that — not against `next dev`, because metadata, static generation and
+image optimisation only behave like production in a real build, and those are
+what most of these specs assert.
+
+```
+tests/
+  smoke.spec.ts          # routes answer, images load, links leave safely, 404s are 404s
+  seo.spec.ts            # title, canonical, OG card resolves, robots + sitemap
+  accessibility.spec.ts  # alt text, heading order, accessible names, keyboard entry
+  responsive.spec.ts     # no sideways scroll; the nav collapses and expands
+```
+
+Every spec runs twice, once on a desktop viewport and once on a phone. Anything
+served by a third party is stubbed, so a rate limit somewhere else never turns
+into a red build here.
 
 ## Layout
 

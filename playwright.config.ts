@@ -32,7 +32,12 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: `pnpm build && pnpm start --port ${PORT}`,
+    // CI builds in its own step so a failing build is reported as a failing
+    // build rather than as a test timeout; locally the build is folded in so
+    // `pnpm test` is one command.
+    command: process.env.CI
+      ? `pnpm start --port ${PORT}`
+      : `pnpm build && pnpm start --port ${PORT}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
