@@ -7,7 +7,7 @@ export const profile = {
   phone: "+1 809 319 0464",
   phoneHref: "+18093190464",
   pronouns: "he/him",
-  linkedin: "https://www.linkedin.com/in/manuel-sanchez-aa4003172/",
+  linkedin: "https://www.linkedin.com/in/manuelsanchezdev/",
   github: "https://github.com/mssnzz",
   githubHandle: "mssnzz",
 } as const;
