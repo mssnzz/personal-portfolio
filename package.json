@@ -2,13 +2,18 @@
   "name": "manuelsanchez.io",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.3.0",
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "test": "playwright test",
-    "test:ui": "playwright test --ui"
+    "test:ui": "playwright test --ui",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
