@@ -148,11 +148,27 @@ export const openSource = [
     note: "Tests for the product above",
   },
   {
-    name: "manuelsanchez.io",
-    url: "https://github.com/mssnzz/manuelsanchez.io",
+    name: "playwright-page-audits",
+    url: "https://github.com/mssnzz/playwright-page-audits",
+    stack: "Playwright · TypeScript",
+    description:
+      "Reusable assertions for the defects that ship quietly: broken images, console errors, sideways scroll on a phone, skipped heading levels, external links handing over window.opener, a share card that previews blank. Every audit is tested twice — that it stays quiet on a clean page, and that it fires on one carrying the defect.",
+    note: "Pulled out of the suite below",
+  },
+  {
+    name: "bayer-dither",
+    url: "https://github.com/mssnzz/bayer-dither",
+    stack: "Canvas2D · TypeScript · no dependencies",
+    description:
+      "The renderer behind the portrait on this page, packaged on its own. An image or a line of text becomes a grid of square marks whose size carries the tone, drawn in the element's own colour so it follows the theme. Respects reduced motion and parks itself off-screen.",
+    note: "The portrait above",
+  },
+  {
+    name: "personal-portfolio",
+    url: "https://github.com/mssnzz/personal-portfolio",
     stack: "Next.js · React · Tailwind",
     description:
-      "This site. Server components, a Canvas2D dither renderer for the portrait and section marks, and a contribution graph read straight off the public profile — no tracking, no third-party embeds.",
+      "This site. Server components, a contribution graph read straight off the public profile with no third-party embed, and 38 end-to-end tests across desktop and mobile viewports running in CI.",
     note: "The page you are on",
   },
 ] as const;
