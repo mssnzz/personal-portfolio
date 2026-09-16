@@ -1,0 +1,293 @@
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@700&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* The track is rendered twice, so translating by half its width lands the
+   copy exactly where the original started — the loop has no seam. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    scrollbar-width: none;
+    /* Anchor targets clear the fixed h-14 header instead of hiding under it. */
+    scroll-padding-top: 3.5rem;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}
+/* The page gutter, in one place. Every content container is `px-6 md:px-10`
+   and the column rules derive their width from this, so the two cannot drift
+   apart — change it here and in that utility pair together. */
+:root { --pf-gutter: 1.5rem; }
+@media (min-width: 48rem) { :root { --pf-gutter: 2.5rem; } }
+
+/* Portfolio (data-pf) — modern editorial layer over the shadcn neutrals.
+   Headings use Geist (bold) — no separate display face, which keeps the type
+   system to sans + mono and reads cleaner against the grid. A single
+   restrained accent is spent only on emphasis and interaction. */
+[data-pf] {
+  --font-display: var(--font-geist-sans), system-ui, sans-serif;
+  --pf-accent: #4f46e5;
+}
+
+.dark [data-pf] {
+  --pf-accent: #a5b4fc;
+}
+
+[data-pf] h1,
+[data-pf] h2,
+[data-pf] h3,
+[data-pf] .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+/* Same specificity as the heading rule above and later in the cascade, so an
+   explicit font utility on a heading wins instead of being silently clobbered
+   back to the display face. */
+[data-pf] .font-mono {
+  font-family: var(--font-mono);
+}
+
+[data-pf] .pf-accent { color: var(--pf-accent); }
+[data-pf] .pf-accent-bg { background-color: var(--pf-accent); }
+[data-pf] .font-hand {
+  font-family: var(--font-caveat), ui-rounded, "Comic Sans MS", cursive;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Reveals must not depend on JS to undo themselves. The server cannot read a
+     motion preference, so it renders the hidden state into the markup, and
+     hydration never strips a style attribute the client no longer asks for —
+     which left every section below the hero invisible. This also covers the
+     case where the JS never arrives at all. */
+  [data-pf] [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* underline that grows from the left on hover — used on text links */
+[data-pf] .pf-link {
+  background-image: linear-gradient(var(--pf-accent), var(--pf-accent));
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-pf] .pf-link:hover { background-size: 100% 1.5px; }
+
+/* The msanz.dev "frontend grid": vertical column rules that run the full
+   viewport height behind everything — header, hero and content alike. Fixed,
+   so the columns stay put while the page scrolls. Aligned to the max-w-6xl
+   (72rem) content column, dialed down so it reads as structure, not chrome. */
+.guide-lines{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+/* faint dot field, like the hero grid in the reference */
+.guide-lines::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(var(--border) 1px, transparent 1px);
+  background-size:28px 28px;
+  opacity:.4;
+  -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+  mask-image:linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+/* Column rules. These have to land on real edges or they read as stray lines
+   drawn over the page, so there are exactly three and each one is somewhere a
+   section actually divides:
+
+   The two that remain frame the content column from outside it, sitting half
+   a gutter clear of the text on either side. Tying the inset to the gutter
+   keeps that breathing room identical at every width, and keeps the rule off
+   the window edge on a phone, where a fixed inset would have run it into the
+   frame.
+
+   Nothing interior survives. The quarter rules matched no section at all: the
+   experience card divides at 420, the skills grid at 536 and 904. A centre
+   rule is defensible for the hero and the two-up grid, but those two already
+   draw that edge themselves — the portrait panel's own border and the grid's
+   own gap — and everywhere else it crossed a panel that has no split there. */
+.guide-lines::after{
+  content:"";
+  position:absolute;
+  top:0;bottom:0;left:50%;
+  width:calc(min(72rem, 100%) - var(--pf-gutter));
+  transform:translateX(-50%);
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to right, var(--border) 1px, transparent 1px);
+  background-position:0 0, 100% 0;
+  background-size:1px 100%, 1px 100%;
+  background-repeat:no-repeat, no-repeat;
+}
+
+/* Recruiters print portfolios. Drop the WebGL hero and unpin the header. */
+@media print {
+  header {
+    position: static !important;
+  }
+  canvas {
+    display: none !important;
+  }
+  section,
+  article {
+    break-inside: avoid;
+  }
+}
