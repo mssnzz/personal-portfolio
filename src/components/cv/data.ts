@@ -122,7 +122,7 @@ export const product = {
   title: "Kalenday",
   tagline: "The product I build and maintain",
   url: "https://kalenday.com",
-  screenshot: "/screenshots/kalenday.png",
+  screenshot: "/screenshots/kalenday.webp",
   description:
     "An AI communication platform: agents that answer, qualify and book customers across WhatsApp, Instagram, email and SMS, in a single inbox. A React single-page app over a Node backend, with channel integrations that have to stay up because real conversations run through them.",
   facts: [
@@ -178,7 +178,7 @@ export const projects: {
     description:
       "Telemedicine platform with video consultations, medical history and appointment management.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
     logo: "/logos/REDACTED.png",
   },
   {
@@ -187,7 +187,7 @@ export const projects: {
     description:
       "Dental supplies and equipment store with catalogue, quote requests and ordering.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
     logo: "/logos/REDACTED.png",
     logoFilter: "grayscale(1) invert(1)",
   },
@@ -206,7 +206,7 @@ export const projects: {
     description:
       "Public portal for the life-assurance programme of the Central Bank of the Dominican Republic.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
     logo: "/logos/REDACTED.png",
   },
   {
@@ -215,7 +215,7 @@ export const projects: {
     description:
       "Insurance provider portal: coverage, affiliated provider network and online authorisations.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
     logo: "/logos/REDACTED.png",
   },
   {
@@ -224,7 +224,7 @@ export const projects: {
     description:
       "Health services platform with appointment booking and a medical provider directory.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
   },
   {
     title: "REDACTED",
@@ -232,7 +232,7 @@ export const projects: {
     description:
       "Medical equipment e-commerce platform with catalogue, quote requests and blog.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
     logo: "/logos/REDACTED.png",
   },
   {
@@ -241,7 +241,7 @@ export const projects: {
     description:
       "Technology solutions and digital consulting site for growing companies.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
     logo: "/logos/REDACTED.png",
   },
   {
@@ -250,7 +250,7 @@ export const projects: {
     description:
       "Scrum Master certification platform with hands-on training and international certification.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
   },
   {
     title: "REDACTED",
@@ -258,7 +258,7 @@ export const projects: {
     description:
       "Corporate site for a technology and digital transformation company.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
     logo: "/logos/REDACTED-mark.png",
   },
   {
@@ -267,7 +267,7 @@ export const projects: {
     description:
       "Corporate website for an enterprise software company.",
     url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.png",
+    screenshot: "/screenshots/REDACTED.webp",
     logo: "/logos/REDACTED.png",
     logoFilter: "invert(1)",
   },

@@ -1,11 +1,31 @@
 "use client";
 
 import { useRef, useMemo, useState, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 // postprocessing removed — glow is per-particle
 import { useTheme } from "next-themes";
 import * as THREE from "three";
 import { sampleBrainFromImage } from "@/components/brain-geometry";
+
+/**
+ * Deterministic stand-in for `Math.random`.
+ *
+ * These fields are built inside `useMemo`, which runs during render, and a
+ * memo that recomputes must produce the same field or the scene visibly
+ * reshuffles under the viewer. Seeding makes each field reproducible instead
+ * of merely usually-stable — and it is what lets a screenshot of this scene
+ * be compared against another run. mulberry32: small, fast, good enough for
+ * scattering points.
+ */
+function seededRandom(seed: number) {
+  let t = seed >>> 0;
+  return () => {
+    t = (t + 0x6d2b79f5) >>> 0;
+    let x = Math.imul(t ^ (t >>> 15), 1 | t);
+    x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
 /* ─── Sharp circle texture (no gradient halo) ─── */
 function useCircleTexture() {
@@ -33,6 +53,9 @@ function generateConnections(
   count: number,
   maxDist: number
 ): { starts: Float32Array; ends: Float32Array; count: number } {
+  // Called from a memo, so it answers to the same rule as the fields above
+  // even though the linter cannot see through the call.
+  const rand = seededRandom(0x5eed00);
   const starts: number[] = [];
   const ends: number[] = [];
 
@@ -52,7 +75,7 @@ function generateConnections(
       const dz = iz - jz;
       const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-      if (dist < maxDist && Math.random() < 0.3) {
+      if (dist < maxDist && rand() < 0.3) {
         starts.push(ix, iy, iz);
         ends.push(jx, jy, jz);
         connections++;
@@ -85,27 +108,30 @@ function Neurons({ positions, count }: { positions: Float32Array; count: number 
   const isDark = theme === "dark";
 
   const baseColors = useMemo(() => {
+    const rand = seededRandom(0x5eed01);
     const c = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       if (isDark) {
-        c[i * 3] = 0.35 + Math.random() * 0.15;
-        c[i * 3 + 1] = 0.35 + Math.random() * 0.15;
-        c[i * 3 + 2] = 0.45 + Math.random() * 0.15;
+        c[i * 3] = 0.35 + rand() * 0.15;
+        c[i * 3 + 1] = 0.35 + rand() * 0.15;
+        c[i * 3 + 2] = 0.45 + rand() * 0.15;
       } else {
-        c[i * 3] = 0.45 + Math.random() * 0.15;
-        c[i * 3 + 1] = 0.5 + Math.random() * 0.15;
-        c[i * 3 + 2] = 0.65 + Math.random() * 0.1;
+        c[i * 3] = 0.45 + rand() * 0.15;
+        c[i * 3 + 1] = 0.5 + rand() * 0.15;
+        c[i * 3 + 2] = 0.65 + rand() * 0.1;
       }
     }
     return c;
   }, [count, isDark]);
 
   const phases = useMemo(() => {
-    return Array.from({ length: count }, () => Math.random() * Math.PI * 2);
+    const rand = seededRandom(0x5eed02);
+    return Array.from({ length: count }, () => rand() * Math.PI * 2);
   }, [count]);
 
   const twinkleSpeeds = useMemo(() => {
-    return Array.from({ length: count }, () => 0.3 + Math.random() * 1.5);
+    const rand = seededRandom(0x5eed03);
+    return Array.from({ length: count }, () => 0.3 + rand() * 1.5);
   }, [count]);
 
   useFrame(({ clock }) => {
@@ -205,27 +231,31 @@ function Pulses({
   const isDark = theme === "dark";
 
   const pulseIndices = useMemo(() => {
+    const rand = seededRandom(0x5eed04);
     const indices = [];
     for (let i = 0; i < pulseCount; i++) {
-      indices.push(Math.floor(Math.random() * connectionCount));
+      indices.push(Math.floor(rand() * connectionCount));
     }
     return indices;
   }, [pulseCount, connectionCount]);
 
   const speeds = useMemo(() => {
-    return pulseIndices.map(() => 0.05 + Math.random() * 0.4);
+    const rand = seededRandom(0x5eed05);
+    return pulseIndices.map(() => 0.05 + rand() * 0.4);
   }, [pulseIndices]);
 
   const offsets = useMemo(() => {
-    return pulseIndices.map(() => Math.random());
+    const rand = seededRandom(0x5eed06);
+    return pulseIndices.map(() => rand());
   }, [pulseIndices]);
 
   const positions = useMemo(() => new Float32Array(pulseCount * 3), [pulseCount]);
   const colors = useMemo(() => {
+    const rand = seededRandom(0x5eed0a);
     const c = new Float32Array(pulseCount * 3);
     for (let i = 0; i < pulseCount; i++) {
       if (isDark) {
-        const type = Math.random();
+        const type = rand();
         if (type < 0.4) {
           c[i * 3] = 0.3;
           c[i * 3 + 1] = 0.5;
@@ -240,7 +270,7 @@ function Pulses({
           c[i * 3 + 2] = 0.9; // cyan
         }
       } else {
-        const type = Math.random();
+        const type = rand();
         if (type < 0.4) {
           c[i * 3] = 0.15;
           c[i * 3 + 1] = 0.3;
@@ -321,17 +351,20 @@ function ActiveRegions({
   const isDark = theme === "dark";
 
   const pulseIndices = useMemo(() => {
+    const rand = seededRandom(0x5eed07);
     return Array.from({ length: extraPulseCount }, () =>
-      Math.floor(Math.random() * connectionCount)
+      Math.floor(rand() * connectionCount)
     );
   }, [extraPulseCount, connectionCount]);
 
   const speeds = useMemo(() => {
-    return pulseIndices.map(() => 0.04 + Math.random() * 0.35);
+    const rand = seededRandom(0x5eed08);
+    return pulseIndices.map(() => 0.04 + rand() * 0.35);
   }, [pulseIndices]);
 
   const offsets = useMemo(() => {
-    return pulseIndices.map(() => Math.random());
+    const rand = seededRandom(0x5eed09);
+    return pulseIndices.map(() => rand());
   }, [pulseIndices]);
 
   const positions = useMemo(() => new Float32Array(extraPulseCount * 3), [extraPulseCount]);
@@ -486,7 +519,6 @@ function SceneFadeIn({ children }: { children: React.ReactNode }) {
 
 /* ─── Camera ─── */
 function Rig() {
-  const { camera } = useThree();
   const mouse = useRef({ x: 0, y: 0 });
   const scrollZ = useRef(0);
 
@@ -500,7 +532,10 @@ function Rig() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useFrame(({ pointer }) => {
+  // `camera` comes off the frame state rather than `useThree()`: r3f drives the
+  // scene by mutation, and mutating an object a hook returned is what the
+  // immutability rule (rightly) rejects. Same object, legitimate handle.
+  useFrame(({ pointer, camera }) => {
     mouse.current.x = THREE.MathUtils.lerp(mouse.current.x, pointer.x * 0.5, 0.015);
     mouse.current.y = THREE.MathUtils.lerp(mouse.current.y, pointer.y * 0.3, 0.015);
     camera.position.x = mouse.current.x;
