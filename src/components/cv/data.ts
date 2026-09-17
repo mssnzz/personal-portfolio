@@ -3,7 +3,7 @@ export const profile = {
   role: "Fullstack Developer",
   tagline: "Building accessible, responsive web apps — and testing them.",
   location: "Santo Domingo, DR · UTC−4",
-  email: "manuelarturosanz@gmail.com",
+  email: "hola@manuelsanchez.io",
   phone: "+1 809 319 0464",
   phoneHref: "+18093190464",
   pronouns: "he/him",
