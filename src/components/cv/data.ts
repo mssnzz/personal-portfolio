@@ -101,14 +101,14 @@ export const experience: {
     duration: "5 yrs",
     track: "dev",
     trackLabel: "Development",
-    title: "Fullstack Developer",
-    org: "Clix Solution Consulting · Remote",
+    title: "Freelance Fullstack Developer",
+    org: "Clix Solution Consulting · Remote, contract",
     bullets: [
-      "Five years building and maintaining production web applications end to end, across client engagements including REDACTED and REDACTED.",
+      "Five years building and maintaining production web applications end to end, on client engagements across healthcare, insurance and SaaS.",
       "Node.js backends with ORM over SQL and NoSQL databases — the layer most API tests target.",
       "Code review and debugging on existing codebases, not only greenfield work.",
       "Cross-browser and responsive compatibility work on every delivery.",
-      "Shipped and still maintain the client sites listed below, across healthcare, insurance and SaaS.",
+      "Shipped and still maintain several of those client sites. References and specific engagements available on request.",
     ],
   },
 ];
@@ -164,122 +164,6 @@ export const openSource = [
     note: "The page you are on",
   },
 ] as const;
-
-export const projects: {
-  title: string;
-  category: string;
-  description: string;
-  url: string;
-  screenshot: string;
-  /** Client mark where one exists; the card falls back to the name in type. */
-  logo?: string;
-  /**
-   * CSS filter for the mark on the dark band. Most of these read as drawn;
-   * the two that do not are set here rather than by a blanket rule, because a
-   * uniform silhouette filter flattens the logos that carry their own colour.
-   */
-  logoFilter?: string;
-}[] = [
-  {
-    title: "REDACTED",
-    category: "Telehealth",
-    description:
-      "Telemedicine platform with video consultations, medical history and appointment management.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-    logo: "/logos/REDACTED.png",
-  },
-  {
-    title: "REDACTED",
-    category: "E-commerce",
-    description:
-      "Dental supplies and equipment store with catalogue, quote requests and ordering.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-    logo: "/logos/REDACTED.png",
-    logoFilter: "grayscale(1) invert(1)",
-  },
-  {
-    title: "REDACTED",
-    category: "SaaS",
-    description:
-      "Booking system for small businesses with online reservations and automated reminders.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED",
-    logo: "/logos/REDACTED",
-  },
-  {
-    title: "REDACTED",
-    category: "Institutional",
-    description:
-      "Public portal for the life-assurance programme of the Central Bank of the Dominican Republic.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-    logo: "/logos/REDACTED.png",
-  },
-  {
-    title: "REDACTED",
-    category: "Insurance",
-    description:
-      "Insurance provider portal: coverage, affiliated provider network and online authorisations.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-    logo: "/logos/REDACTED.png",
-  },
-  {
-    title: "REDACTED",
-    category: "Healthcare",
-    description:
-      "Health services platform with appointment booking and a medical provider directory.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-  },
-  {
-    title: "REDACTED",
-    category: "E-commerce",
-    description:
-      "Medical equipment e-commerce platform with catalogue, quote requests and blog.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-    logo: "/logos/REDACTED.png",
-  },
-  {
-    title: "Clix Solution",
-    category: "Consulting",
-    description:
-      "Technology solutions and digital consulting site for growing companies.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-    logo: "/logos/REDACTED.png",
-  },
-  {
-    title: "REDACTED",
-    category: "Education",
-    description:
-      "Scrum Master certification platform with hands-on training and international certification.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-  },
-  {
-    title: "REDACTED",
-    category: "Technology",
-    description:
-      "Corporate site for a technology and digital transformation company.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-    logo: "/logos/REDACTED-mark.png",
-  },
-  {
-    title: "REDACTED",
-    category: "Software",
-    description:
-      "Corporate website for an enterprise software company.",
-    url: "https://REDACTED",
-    screenshot: "/screenshots/REDACTED.webp",
-    logo: "/logos/REDACTED.png",
-    logoFilter: "invert(1)",
-  },
-];
 
 export const skillGroups = [
   {

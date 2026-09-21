@@ -6,7 +6,6 @@ import { CvExperience } from "@/components/cv/cv-experience";
 import { GithubContributions } from "@/components/cv/github-contributions";
 import { CvProduct } from "@/components/cv/cv-product";
 import { CvOpenSource } from "@/components/cv/cv-open-source";
-import { CvWork } from "@/components/cv/cv-work";
 import { CvSkills } from "@/components/cv/cv-skills";
 import { CvContact } from "@/components/cv/cv-contact";
 import { CvFooter } from "@/components/cv/cv-footer";
@@ -14,7 +13,6 @@ import {
   contactRows,
   experience,
   openSource,
-  projects,
   skillGroups,
 } from "@/components/cv/data";
 
@@ -74,18 +72,12 @@ export default function Home() {
           <CvOpenSource />
           <SectionRule
             index="04"
-            label="Clients"
-            meta={`${projects.length} clients`}
-          />
-          <CvWork />
-          <SectionRule
-            index="05"
             label="Toolset"
             meta={`${skillGroups.reduce((n, g) => n + g.items.length, 0)} entries`}
           />
           <CvSkills />
           <SectionRule
-            index="06"
+            index="05"
             label="Contact"
             meta={`${contactRows.length} ways in`}
           />

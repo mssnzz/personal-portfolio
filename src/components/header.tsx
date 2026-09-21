@@ -13,7 +13,6 @@ import { GitHubStar } from "@/components/cv/github-star";
 
 const defaultNavLinks = [
   { label: "Servicios", href: "#servicios" },
-  { label: "Trabajo", href: "#proyectos" },
   { label: "Proceso", href: "#proceso" },
   { label: "Contacto", href: "#contacto" },
 ];

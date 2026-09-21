@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
-import { Trusted } from "@/components/trusted";
 import { Services } from "@/components/services";
-import { Projects } from "@/components/projects";
 import { Testimonials } from "@/components/testimonials";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
@@ -33,9 +31,7 @@ export default function ServiciosPage() {
       <Header />
       <Hero />
       <main className="relative z-10">
-        <Trusted />
         <Services />
-        <Projects />
         <Testimonials />
         <Contact />
         <Footer />
