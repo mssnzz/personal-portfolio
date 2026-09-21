@@ -45,6 +45,25 @@ type NavLink = { label: string; href: string; external?: boolean };
 
 const externalProps = { target: "_blank", rel: "noreferrer noopener" } as const;
 
+function DownloadArrow({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M8 2v8m0 0L5 7m3 3 3-3M2.5 12.5h11" />
+    </svg>
+  );
+}
+
 function ExternalArrow({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -127,6 +146,8 @@ export function Header({
   themeLabel = "Cambiar tema",
   githubRepo,
   githubHint = false,
+  cvHref,
+  cvLabel = "CV",
   brandName = "Manuel Sanchez",
   avatarInitials,
   verified = false,
@@ -141,6 +162,10 @@ export function Header({
   githubRepo?: string;
   /** Show the handwritten 'star it' aviso under the GitHub button. */
   githubHint?: boolean;
+  /** When set, a download control for the CV. Left unset on the services
+   *  landing, whose visitors are clients rather than recruiters. */
+  cvHref?: string;
+  cvLabel?: string;
   /** Wordmark text (defaults to the name). */
   brandName?: string;
   /** When set, a small avatar monogram is shown before the name. */
@@ -249,6 +274,18 @@ export function Header({
 
         <div className="flex items-center gap-2">
           {githubRepo ? <GitHubStar repo={githubRepo} hint={githubHint} /> : null}
+
+          {cvHref ? (
+            <a
+              href={cvHref}
+              download
+              className="hidden items-center gap-1.5 border border-border/60 px-3 py-1.5 text-sm text-muted-foreground transition-colors duration-300 hover:bg-foreground/5 hover:text-foreground md:inline-flex"
+            >
+              <DownloadArrow className="opacity-60" />
+              <span className="hidden lg:inline">Download&nbsp;</span>
+              {cvLabel}
+            </a>
+          ) : null}
 
           <button
             onClick={toggleTheme}
@@ -369,6 +406,21 @@ export function Header({
                   </motion.a>
                 );
               })}
+
+              {cvHref ? (
+                <motion.a
+                  href={cvHref}
+                  download
+                  onClick={() => setMenuOpen(false)}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.05 }}
+                  className="inline-flex items-center gap-2 text-2xl font-light text-muted-foreground"
+                >
+                  Download {cvLabel}
+                  <DownloadArrow className="size-4 opacity-50" />
+                </motion.a>
+              ) : null}
             </div>
           </motion.nav>
         )}

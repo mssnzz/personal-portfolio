@@ -46,6 +46,7 @@ export default function Home() {
         themeLabel="Toggle theme"
         githubRepo="mssnzz/personal-portfolio"
         githubHint
+        cvHref="/manuel-sanchez-cv.pdf"
         avatarInitials="MS"
         verified
         bordered
