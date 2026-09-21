@@ -82,7 +82,8 @@ test.describe("smoke", () => {
   });
 
   test("unknown routes answer 404, not 200", async ({ page }) => {
-    // The defect the Kalenday suite documents; this site should not repeat it.
+    // A defect worth guarding against: a 200 on an unknown route leaves dead
+    // URLs indexable.
     const response = await page.goto("/this-page-does-not-exist");
     expect(response?.status()).toBe(404);
   });

@@ -8,9 +8,9 @@ import { openSource } from "@/components/cv/data";
  * The public repositories, listed rather than screenshotted — a repo's value
  * is what the code does, and a thumbnail of a README says nothing.
  *
- * Two entries, not nineteen. The rest of the account is coursework, technical
+ * Three entries, not nineteen. The rest of the account is coursework, technical
  * tests and undescribed experiments; padding this out with them would cost the
- * two that are worth opening.
+ * three that are worth opening.
  */
 export function CvOpenSource() {
   return (

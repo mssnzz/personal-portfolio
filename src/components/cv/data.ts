@@ -135,25 +135,17 @@ export const product = {
 /**
  * Public repositories worth opening, which is not the same as every public
  * repository. The account carries nineteen; the rest are coursework, technical
- * tests and undescribed experiments, and listing them would dilute these two
+ * tests and undescribed experiments, and listing them would dilute these three
  * rather than add to them.
  */
 export const openSource = [
-  {
-    name: "kalenday-e2e",
-    url: "https://github.com/mssnzz/kalenday-e2e",
-    stack: "Playwright · TypeScript · CI",
-    description:
-      "Smoke, SEO and responsive coverage against kalenday.com, running cross-browser in CI. It documents a real defect too: unknown routes answer 200 instead of 404, so dead URLs stay indexable.",
-    note: "Tests for the product above",
-  },
   {
     name: "playwright-page-audits",
     url: "https://github.com/mssnzz/playwright-page-audits",
     stack: "Playwright · TypeScript",
     description:
       "Reusable assertions for the defects that ship quietly: broken images, console errors, sideways scroll on a phone, skipped heading levels, external links handing over window.opener, a share card that previews blank. Every audit is tested twice — that it stays quiet on a clean page, and that it fires on one carrying the defect.",
-    note: "Pulled out of the suite below",
+    note: "Pulled out of a client suite",
   },
   {
     name: "bayer-dither",
