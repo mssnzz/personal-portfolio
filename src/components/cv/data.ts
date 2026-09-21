@@ -113,22 +113,17 @@ export const experience: {
   },
 ];
 
-// NOTE(manu): confirm your exact role. The site's own noscript block says
-// "Kalenday es un producto de REDACTED DO LLC", so the earlier claim of
-// "my own product / sole developer and operator" was checkable and wrong.
-// Wording below is accurate for a developer who builds and maintains it —
-// adjust if you are a founder or partner rather than the engineer on it.
 export const product = {
   title: "Kalenday",
   tagline: "The product I build and maintain",
   url: "https://kalenday.com",
   screenshot: "/screenshots/kalenday.webp",
   description:
-    "An AI communication platform: agents that answer, qualify and book customers across WhatsApp, Instagram, email and SMS, in a single inbox. A React single-page app over a Node backend, with channel integrations that have to stay up because real conversations run through them.",
+    "An appointment-booking platform for service businesses — barbershops, salons, spas, clinics: public booking pages, staff calendars, client records, payments and reporting in one workspace. A React single-page app over a Node backend, with an omnichannel inbox over WhatsApp, Instagram, Messenger, email and SMS, and trainable AI agents that answer, qualify and book before handing over to a human.",
   facts: [
     ["Role", "Developer — build and maintenance"],
     ["Stack", "React SPA · Node.js · Tailwind"],
-    ["Surface", "WhatsApp, Instagram, email, SMS"],
+    ["Surface", "Booking · CRM · payments · omnichannel inbox"],
   ],
 } as const;
 
