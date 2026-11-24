@@ -47,6 +47,17 @@ export const techBadges: {
   },
   { name: "Cypress", icon: "/logos/tech/cypress.svg" },
   { name: "Git", icon: "/logos/tech/git.svg" },
+  { name: "Claude Code", icon: "/logos/tech/claude.svg" },
+  {
+    name: "Codex",
+    icon: "/logos/tech/openai-dark.svg",
+    iconDark: "/logos/tech/openai-light.svg",
+  },
+  {
+    name: "MCP",
+    icon: "/logos/tech/mcp-dark.svg",
+    iconDark: "/logos/tech/mcp-light.svg",
+  },
 ]
 
 export const specs = [
@@ -199,7 +210,7 @@ export const skillGroups = [
       ["English C1", "comfortable on client and stakeholder calls"],
       ["Written-first", "async handoffs, no meeting required"],
       ["Repro-first", "a bug report is only done when it reproduces"],
-      ["AI-assisted", "Claude Code daily — every change reviewed and tested"],
+      ["AI-assisted", "Claude Code and Codex daily — every change reviewed and tested"],
       ["SLA discipline", "queue hygiene and documented closure"],
     ],
   },
