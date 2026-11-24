@@ -24,6 +24,12 @@ export const techBadges: {
   iconDark?: string;
 }[] = [
   { name: "React", icon: "/logos/tech/react.svg" },
+  { name: "React Native", icon: "/logos/tech/react.svg" },
+  {
+    name: "Expo",
+    icon: "/logos/tech/expo-dark.svg",
+    iconDark: "/logos/tech/expo-light.svg",
+  },
   {
     name: "Next.js",
     icon: "/logos/tech/nextjs2-dark.svg",
@@ -119,11 +125,12 @@ export const product = {
   url: "https://kalenday.com",
   screenshot: "/screenshots/kalenday.webp",
   description:
-    "An appointment-booking platform for service businesses — barbershops, salons, spas, clinics: public booking pages, staff calendars, client records, payments and reporting in one workspace. A React single-page app over a Node backend, with an omnichannel inbox over WhatsApp, Instagram, Messenger, email and SMS, and trainable AI agents that answer, qualify and book before handing over to a human.",
+    "An appointment-booking platform for service businesses — barbershops, salons, spas, clinics: public booking pages, staff calendars, client records, deposits, reminders and reporting in one workspace. A React web app and a native iOS app built with Expo and React Native, over a Node backend, with an assistant that answers on WhatsApp and Instagram, books the slot and asks for the deposit before handing over to a human.",
   facts: [
     ["Role", "Developer — build and maintenance"],
-    ["Stack", "React SPA · Node.js · Tailwind"],
-    ["Surface", "Booking · CRM · payments · omnichannel inbox"],
+    ["Stack", "React · Expo / React Native · Node.js · Tailwind"],
+    ["Surface", "Web · iOS app (App Store) · booking page"],
+    ["Product", "Booking · CRM · deposits · WhatsApp / Instagram inbox"],
   ],
 } as const;
 
@@ -167,9 +174,12 @@ export const skillGroups = [
       ["JavaScript", "proficient"],
       ["TypeScript", "working"],
       ["React / Next.js", "proficient"],
+      ["React Native / Expo", "shipped Kalenday's iOS app"],
       ["Node.js / NestJS", "backends, REST, ORM"],
       ["SQL & NoSQL", "schema and query work"],
       ["Git", "daily, including review"],
+      ["LLM integration", "tool calling, agents, prompt design"],
+      ["MCP", "connecting tools and data to agents"],
     ],
   },
   {
@@ -189,6 +199,7 @@ export const skillGroups = [
       ["English C1", "comfortable on client and stakeholder calls"],
       ["Written-first", "async handoffs, no meeting required"],
       ["Repro-first", "a bug report is only done when it reproduces"],
+      ["AI-assisted", "Claude Code daily — every change reviewed and tested"],
       ["SLA discipline", "queue hygiene and documented closure"],
     ],
   },
