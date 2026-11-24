@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useCallback,
-  useEffect,
-  useSyncExternalStore,
-} from "react";
+import { useState, useCallback, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
@@ -82,8 +77,22 @@ function ExternalArrow({ className = "" }: { className?: string }) {
   );
 }
 
-/** Height of the fixed bar (h-14), as the observer's top inset. */
-const HEADER_PX = 56;
+/** Bottom edge of the fixed bar — 56px tall, plus the 12px the floating
+ *  variant sits below the top — as the observer's top inset. */
+const HEADER_PX = 68;
+
+/** True once the page has scrolled off the top, so the floating bar can
+ *  firm up its background only when there is content passing under it. */
+function useScrolled(threshold = 8) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > threshold);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [threshold]);
+  return scrolled;
+}
 
 /**
  * Marks the nav link whose section is currently under the header.
@@ -151,6 +160,7 @@ export function Header({
   avatarInitials,
   verified = false,
   bordered = false,
+  floating = false,
 }: {
   navLinks?: NavLink[];
   homeHref?: string;
@@ -174,12 +184,16 @@ export function Header({
   /** Full-width blurred bar with a bottom hairline — for content pages that
    *  scroll behind the nav. Off by default (the agency hero is transparent). */
   bordered?: boolean;
+  /** A rounded bar floating just below the top edge, inset from the sides,
+   *  that firms up its background once the page scrolls under it. */
+  floating?: boolean;
 } = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const activeHref = useActiveSection(navLinks);
   const reduceMotion = useReducedMotion();
   const mounted = useHydrated();
+  const scrolled = useScrolled();
 
   const toggleTheme = useCallback(() => {
     const next = theme === "dark" ? "light" : "dark";
@@ -197,22 +211,38 @@ export function Header({
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 ${
-        bordered
-          ? "border-b border-border/50 bg-background/80 backdrop-blur-md"
-          : ""
+        floating
+          ? "px-3 pt-3 md:px-6"
+          : bordered
+            ? "border-b border-border/50 bg-background/80 backdrop-blur-md"
+            : ""
       }`}
     >
       {/* px-6 max-w-6xl — identical to the hero and sections, so the avatar's
           left edge lands on the same content-column guide as everything below. */}
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6 md:px-10">
+      <div
+        className={
+          floating
+            ? `mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full border px-2 backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-500 ${
+                scrolled
+                  ? "border-border bg-background/85 shadow-[0_10px_40px_-16px_rgb(0_0_0/0.45)]"
+                  : "border-border/70 bg-background/55"
+              }`
+            : "mx-auto flex h-14 max-w-6xl items-center justify-between px-6 md:px-10"
+        }
+      >
         <Link
           href={homeHref}
           className={`group flex items-center gap-2.5 text-[15px] font-medium tracking-tight ${
             avatarInitials ? "font-display" : "font-mono"
-          }`}
+          } ${floating ? "rounded-full py-1 pl-1 pr-3 transition-colors duration-300 hover:bg-foreground/5" : ""}`}
         >
           {avatarInitials ? (
-            <span className="flex size-7 items-center justify-center rounded-full border border-border/60 bg-foreground/[0.04] text-[11px] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
+            <span
+              className={`flex items-center justify-center rounded-full border border-border/60 bg-foreground/[0.04] text-muted-foreground transition-colors duration-300 group-hover:text-foreground ${
+                floating ? "size-9 text-xs" : "size-7 text-[11px]"
+              }`}
+            >
               {avatarInitials}
             </span>
           ) : null}
@@ -239,7 +269,9 @@ export function Header({
           ) : null}
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav
+          className={`hidden items-center md:flex ${floating ? "gap-0.5" : "gap-1"}`}
+        >
           {navLinks.map((link) => {
             const active = link.href === activeHref;
 
@@ -249,16 +281,24 @@ export function Header({
                 href={link.href}
                 {...(link.external ? externalProps : {})}
                 aria-current={active ? "true" : undefined}
-                className={`relative inline-flex items-center gap-1 px-3.5 py-1.5 text-sm transition-colors duration-300 hover:bg-foreground/5 hover:text-foreground ${
-                  active ? "text-foreground" : "text-muted-foreground"
-                }`}
+                className={`relative isolate inline-flex items-center gap-1 text-sm transition-colors duration-300 hover:text-foreground ${
+                  floating
+                    ? "rounded-full px-4 py-2"
+                    : "px-3.5 py-1.5 hover:bg-foreground/5"
+                } ${active ? "text-foreground" : "text-muted-foreground"}`}
               >
                 {link.label}
-                {link.external ? <ExternalArrow className="opacity-60" /> : null}
+                {link.external ? (
+                  <ExternalArrow className="opacity-60" />
+                ) : null}
                 {active ? (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-x-3 bottom-0.5 h-px bg-foreground"
+                    className={
+                      floating
+                        ? "absolute inset-0 -z-10 rounded-full bg-foreground/[0.08]"
+                        : "absolute inset-x-3 bottom-0.5 h-px bg-foreground"
+                    }
                     transition={
                       reduceMotion
                         ? { duration: 0 }
@@ -271,14 +311,20 @@ export function Header({
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
-          {githubRepo ? <GitHubStar repo={githubRepo} hint={githubHint} /> : null}
+        <div className={`flex items-center ${floating ? "gap-1" : "gap-2"}`}>
+          {githubRepo ? (
+            <GitHubStar repo={githubRepo} hint={githubHint} />
+          ) : null}
 
           {cvHref ? (
             <a
               href={cvHref}
               download
-              className="hidden items-center gap-1.5 border border-border/60 px-3 py-1.5 text-sm text-muted-foreground transition-colors duration-300 hover:bg-foreground/5 hover:text-foreground md:inline-flex"
+              className={`hidden items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-300 hover:bg-foreground/5 hover:text-foreground md:inline-flex ${
+                floating
+                  ? "rounded-full px-3.5 py-2"
+                  : "border border-border/60 px-3 py-1.5"
+              }`}
             >
               <DownloadArrow className="opacity-60" />
               <span className="hidden lg:inline">Download&nbsp;</span>
@@ -288,7 +334,9 @@ export function Header({
 
           <button
             onClick={toggleTheme}
-            className="relative flex size-8 items-center justify-center text-muted-foreground transition-colors duration-300 hover:bg-foreground/5 hover:text-foreground"
+            className={`relative flex items-center justify-center text-muted-foreground transition-colors duration-300 hover:bg-foreground/5 hover:text-foreground ${
+              floating ? "size-9 rounded-full" : "size-8"
+            }`}
             aria-label={themeLabel}
           >
             {mounted ? (
@@ -337,17 +385,23 @@ export function Header({
             )}
           </button>
 
-          <span className="mx-1 hidden h-4 w-px bg-border/60 md:block" />
+          {floating ? null : (
+            <span className="mx-1 hidden h-4 w-px bg-border/60 md:block" />
+          )}
 
           <a
             href={ctaHref}
-            className="hidden bg-foreground px-4 py-1.5 text-sm font-medium text-background transition-opacity duration-300 hover:opacity-85 md:block"
+            className={`hidden bg-foreground text-sm font-medium text-background transition-opacity duration-300 hover:opacity-85 md:block ${
+              floating ? "ml-1 rounded-full px-5 py-2.5" : "px-4 py-1.5"
+            }`}
           >
             {ctaLabel}
           </a>
 
           <button
-            className="flex size-8 items-center justify-center text-muted-foreground md:hidden"
+            className={`flex items-center justify-center text-muted-foreground md:hidden ${
+              floating ? "size-10 rounded-full hover:bg-foreground/5" : "size-8"
+            }`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuLabel}
           >
@@ -378,7 +432,11 @@ export function Header({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-x-0 top-14 border-b border-border/40 bg-background/95 px-6 pb-8 pt-6 backdrop-blur-xl md:hidden"
+            className={
+              floating
+                ? "absolute inset-x-3 top-[4.75rem] rounded-3xl border border-border bg-background/95 px-6 pb-7 pt-6 shadow-[0_20px_50px_-20px_rgb(0_0_0/0.5)] backdrop-blur-xl md:hidden"
+                : "absolute inset-x-0 top-14 border-b border-border/40 bg-background/95 px-6 pb-8 pt-6 backdrop-blur-xl md:hidden"
+            }
           >
             <div className="flex flex-col gap-5">
               {navLinks.map((link, i) => {

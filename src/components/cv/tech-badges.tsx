@@ -8,11 +8,11 @@ import { techBadges } from "@/components/cv/data";
  */
 export function TechBadges({ className }: { className?: string }) {
   return (
-    <ul className={`flex flex-wrap gap-2 ${className ?? ""}`}>
+    <ul className={`flex flex-wrap gap-1.5 md:gap-2 ${className ?? ""}`}>
       {techBadges.map((tech) => (
         <li
           key={tech.name}
-          className="inline-flex items-center gap-2 border border-border/50 bg-background/40 px-3 py-1.5 backdrop-blur-sm"
+          className="inline-flex items-center gap-2 rounded-full border border-border bg-background/40 px-2.5 py-1.5 backdrop-blur-sm md:gap-2.5 md:px-3.5 md:py-2"
         >
           {tech.iconDark ? (
             <>
@@ -20,18 +20,18 @@ export function TechBadges({ className }: { className?: string }) {
               <img
                 src={tech.icon}
                 alt=""
-                width={15}
-                height={15}
-                className="block size-[15px] dark:hidden"
+                width={18}
+                height={18}
+                className="block size-[15px] md:size-[18px] dark:hidden"
                 aria-hidden="true"
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={tech.iconDark}
                 alt=""
-                width={15}
-                height={15}
-                className="hidden size-[15px] dark:block"
+                width={18}
+                height={18}
+                className="hidden size-[15px] md:size-[18px] dark:block"
                 aria-hidden="true"
               />
             </>
@@ -40,13 +40,13 @@ export function TechBadges({ className }: { className?: string }) {
             <img
               src={tech.icon}
               alt=""
-              width={15}
-              height={15}
-              className="size-[15px]"
+              width={18}
+              height={18}
+              className="size-[15px] md:size-[18px]"
               aria-hidden="true"
             />
           )}
-          <span className="font-mono text-[12px] tracking-tight text-muted-foreground">
+          <span className="font-mono text-xs tracking-tight text-foreground/80 md:text-[13px]">
             {tech.name}
           </span>
         </li>

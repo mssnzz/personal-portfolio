@@ -1,139 +1,138 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
 import { experience, type Track } from "@/components/cv/data";
+import { SectionHeader, SectionShell } from "@/components/cv/section-header";
 
-/** The section's thesis is two tracks running at once, so the track is the one
- *  thing carried in colour: the dev rail is the accent, support stays neutral. */
-const trackRail: Record<Track, string> = {
-  dev: "bg-[var(--pf-accent)]",
-  support: "bg-foreground/30",
-  now: "bg-[var(--pf-accent)]",
+/** Development work is carried in the accent; support stays neutral. */
+const dotColour: Record<Track, string> = {
+  dev: "bg-[var(--pf-accent)] border-[var(--pf-accent)]",
+  now: "bg-[var(--pf-accent)] border-[var(--pf-accent)]",
+  support: "bg-foreground/60 border-foreground/60",
 };
 
-function TrackKey({ track, label }: { track: Track; label: string }) {
-  return (
-    <span className="inline-flex items-center gap-2">
-      <span className={`size-1.5 shrink-0 ${trackRail[track]}`} />
-      <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-        {label}
-      </span>
-    </span>
-  );
-}
-
+/**
+ * The roles as a timeline that fills as you read it.
+ *
+ * A vertical line runs down the left of the roles and an accent line grows
+ * over it with the scroll, so the reader can see how far through the history
+ * they are; each role's marker lights as the line reaches it. The cards this
+ * replaced were boxed one under another with nothing to say they were a
+ * sequence.
+ */
 export function CvExperience({
   contributions,
 }: {
   /** Server-rendered panel dropped under the roles — see `page.tsx`. */
   contributions?: ReactNode;
 }) {
+  const listRef = useRef<HTMLOListElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: listRef,
+    // Starts filling as the first role reaches mid-screen, done as the last
+    // one does.
+    offset: ["start 55%", "end 55%"],
+  });
+  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
+
   return (
-    <section id="experience" className="pb-12 pt-8 md:pb-16 md:pt-10">
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <Reveal>
-              <h2 className="text-2xl font-medium tracking-tight md:text-3xl">
-                Support track, parallel dev track
-              </h2>
-            </Reveal>
-          </div>
-          <Reveal delay={0.15}>
-            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Full employment history available on request.
-            </p>
-          </Reveal>
-        </div>
+    <SectionShell id="experience">
+      <SectionHeader
+        index="01"
+        label="Experience"
+        meta={`${experience.length} roles · 2019 — 2026`}
+        title="Building now, tested in production."
+        lead="Development first, with two years of QA and support on a live iOS, Android and web product. Full history on request."
+      />
 
-        {/* The rail colours mean nothing without this, and the headline claims
-            two tracks — so name them once, right above the stack. */}
-        <Reveal delay={0.2}>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border/50 py-3">
-            <TrackKey track="dev" label="Dev track" />
-            <TrackKey track="support" label="Support track" />
-          </div>
-        </Reveal>
+      <ol ref={listRef} className="relative mt-16 md:mt-20">
+        {/* The track and its fill. Left edge on phones, between the date
+            column and the role on desktop. */}
+        <span
+          aria-hidden="true"
+          className="absolute bottom-2 left-[5px] top-2 w-px bg-border md:left-[203px]"
+        />
+        <motion.span
+          aria-hidden="true"
+          className="absolute bottom-2 left-[5px] top-2 w-px origin-top bg-[var(--pf-accent)] md:left-[203px]"
+          style={{ scaleY: reduce ? 1 : fill }}
+        />
 
-        <StaggerContainer
-          className="flex flex-col gap-px border-x border-b border-border/50 bg-border/50"
-          staggerDelay={0.08}
-        >
-          {experience.map((job, i) => (
-            <StaggerItem key={job.title + job.range}>
-              <article className="group relative grid h-full gap-5 bg-background p-6 pl-8 transition-colors duration-500 hover:bg-foreground/[0.02] md:grid-cols-[200px_1fr] md:gap-10 md:p-8 md:pl-10">
-                {/* Track rail: the card's left edge, not a decoration floating
-                    beside it. Dim until hover so the stack stays quiet. */}
-                <span
-                  aria-hidden="true"
-                  className={`absolute inset-y-0 left-0 w-0.5 opacity-40 transition-opacity duration-500 group-hover:opacity-100 ${trackRail[job.track]}`}
-                />
+        {experience.map((job, i) => (
+          <li
+            key={job.title + job.range}
+            className="relative grid gap-4 pb-16 pl-8 last:pb-0 md:grid-cols-[180px_1fr] md:gap-12 md:pl-0"
+          >
+            {/* Marker: hollow until the reader reaches it. */}
+            <motion.span
+              aria-hidden="true"
+              className={`absolute left-0 top-1.5 size-[11px] border-2 md:left-[198px] ${dotColour[job.track]}`}
+              initial={{ scale: 0.4, opacity: 0.3 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true, margin: "0px 0px -45% 0px" }}
+              transition={{ duration: reduce ? 0 : 0.4 }}
+            />
 
-                {/* Sticky so the dates stay put while a long bullet list
-                    scrolls past them. No-op on the shorter cards. */}
-                <div className="flex flex-col gap-2 md:sticky md:top-20 md:self-start">
-                  <div className="flex items-baseline gap-3">
-                    <span className="font-mono text-[11px] tabular-nums text-muted-foreground/50">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-mono text-sm tabular-nums text-foreground">
-                      {job.range}
-                    </span>
-                  </div>
+            <div className="flex flex-col gap-2 md:sticky md:top-24 md:self-start md:text-right">
+              <span className="font-mono text-sm tabular-nums text-foreground">
+                {job.range}
+              </span>
+              <span className="font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground">
+                {job.duration} · {job.trackLabel}
+              </span>
+            </div>
 
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2 pl-[26px]">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground/60">
-                      {job.duration}
-                    </span>
-                    <span className="border border-border/40 px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground/60">
-                      {job.trackLabel}
-                    </span>
-                  </div>
-                </div>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{
+                duration: reduce ? 0 : 0.6,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              data-reveal
+              className="md:pl-6"
+            >
+              <span className="font-mono text-xs tabular-nums text-muted-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-1 text-2xl font-medium tracking-tight md:text-[1.75rem]">
+                {job.title}
+              </h3>
+              <p className="mt-1 text-base text-muted-foreground">{job.org}</p>
 
-                <div>
-                  <h3 className="text-lg font-medium tracking-tight">
-                    {job.title}
-                  </h3>
-                  <p className="mt-1 font-mono text-[13px] text-muted-foreground/60">
-                    {job.org}
-                  </p>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-foreground/90 md:text-[17px]">
+                {job.bullets[0]}
+              </p>
 
-                  {/* The first bullet is the role in one sentence; the rest are
-                      detail. Same data, stated hierarchy — five equal bullets
-                      per card read as a wall. */}
-                  <p className="mt-5 text-[15px] leading-relaxed text-foreground/85">
-                    {job.bullets[0]}
-                  </p>
+              {job.bullets.length > 1 ? (
+                <ul className="mt-5 flex max-w-2xl flex-col gap-2.5">
+                  {job.bullets.slice(1).map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex gap-3 text-[15px] leading-relaxed text-muted-foreground"
+                    >
+                      <span className="mt-[11px] h-px w-3 shrink-0 bg-foreground/40" />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
 
-                  {job.bullets.length > 1 ? (
-                    <ul className="mt-4 flex flex-col gap-2 border-t border-border/40 pt-4">
-                      {job.bullets.slice(1).map((bullet) => (
-                        <li
-                          key={bullet}
-                          className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
-                        >
-                          <span className="mt-[9px] h-px w-3 shrink-0 bg-foreground/25" />
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
+              {job.note ? (
+                <p className="mt-4 border-l border-border pl-4 text-[15px] leading-relaxed text-muted-foreground">
+                  {job.note}
+                </p>
+              ) : null}
+            </motion.div>
+          </li>
+        ))}
+      </ol>
 
-                  {job.note ? (
-                    <p className="mt-4 border-l border-border/50 pl-4 text-sm leading-relaxed text-muted-foreground/60">
-                      {job.note}
-                    </p>
-                  ) : null}
-                </div>
-              </article>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-
-        {contributions ? <div className="mt-px">{contributions}</div> : null}
-      </div>
-    </section>
+      {contributions ? <div className="mt-20">{contributions}</div> : null}
+    </SectionShell>
   );
 }

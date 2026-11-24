@@ -1,6 +1,6 @@
 export const profile = {
   name: "Manuel Sanchez",
-  role: "Fullstack Developer",
+  role: "Fullstack Developer · React Native · AI",
   tagline: "Building accessible, responsive web apps — and testing them.",
   location: "Santo Domingo, DR · UTC−4",
   email: "hola@manuelsanchez.io",
@@ -62,7 +62,7 @@ export const techBadges: {
 
 export const specs = [
   { label: "Development", value: "5 years, production" },
-  { label: "Defect triage", value: "5 years, live users" },
+  { label: "Defect triage", value: "2 years, live users" },
   { label: "Test surface", value: "iOS · Android · Web" },
   { label: "Automation", value: "Cypress · JS / TS" },
   { label: "English", value: "C1 · client-ready" },
@@ -82,9 +82,24 @@ export const experience: {
   bullets: string[];
   note?: string;
 }[] = [
-  // Curated to the three roles that carry the QA + development story. Shorter
-  // and older stints (Team International, Teleperformance, the HVAC contract)
-  // are left off deliberately; full history goes on application forms.
+  // Current development work leads, then the three roles that carry the QA +
+  // development story. Shorter and older stints (Team International,
+  // Teleperformance, the HVAC contract) are left off deliberately; full history
+  // goes on application forms.
+  {
+    range: "2026 — Present",
+    duration: "Current",
+    track: "now",
+    trackLabel: "Development",
+    title: "Developer",
+    org: "Kalenday · Remote",
+    bullets: [
+      "Build and maintain an appointment-booking platform for service businesses: booking pages, staff calendars, client records, deposits, reminders and reporting.",
+      "Shipped the native iOS app with Expo and React Native, live on the App Store alongside the React web app.",
+      "Node.js backend behind both clients, one API for web and mobile.",
+      "Built the assistant that answers on WhatsApp and Instagram, finds a slot, books it and asks for the deposit before handing over to a human.",
+    ],
+  },
   {
     range: "Jul 2025 — Apr 2026",
     duration: "10 mo",
@@ -132,16 +147,35 @@ export const experience: {
 
 export const product = {
   title: "Kalenday",
-  tagline: "The product I build and maintain",
   url: "https://kalenday.com",
+  host: "kalenday.com",
   screenshot: "/screenshots/kalenday.webp",
-  description:
-    "An appointment-booking platform for service businesses — barbershops, salons, spas, clinics: public booking pages, staff calendars, client records, deposits, reminders and reporting in one workspace. A React web app and a native iOS app built with Expo and React Native, over a Node backend, with an assistant that answers on WhatsApp and Instagram, books the slot and asks for the deposit before handing over to a human.",
-  facts: [
-    ["Role", "Developer — build and maintenance"],
-    ["Stack", "React · Expo / React Native · Node.js · Tailwind"],
-    ["Surface", "Web · iOS app (App Store) · booking page"],
-    ["Product", "Booking · CRM · deposits · WhatsApp / Instagram inbox"],
+  summary:
+    "Appointment booking for barbershops, salons, spas and clinics — booking page, staff calendars, clients, deposits and reminders in one workspace.",
+  role: "Developer — build and maintenance",
+  /** What I built, one surface per column. Short on purpose: the card is
+   *  read in a glance, and the stack is already in the hero. */
+  highlights: [
+    {
+      label: "Web app",
+      stack: "React · Tailwind",
+      text: "Booking page, staff calendars, client records and reporting.",
+    },
+    {
+      label: "iOS app",
+      stack: "Expo · React Native",
+      text: "Native app for owners and staff, live on the App Store.",
+    },
+    {
+      label: "Backend",
+      stack: "Node.js",
+      text: "One API behind web and mobile: bookings, deposits, reminders.",
+    },
+    {
+      label: "Assistant",
+      stack: "WhatsApp · Instagram",
+      text: "Answers clients, books the slot and asks for the deposit.",
+    },
   ],
 } as const;
 

@@ -4,10 +4,10 @@ import { profile } from "@/components/cv/data";
 
 export function CvFooter() {
   return (
-    <footer className="border-t border-border/20">
+    <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <div className="flex justify-center py-12 md:py-16">
-          <span className="font-mono text-4xl font-medium tracking-tight md:text-6xl">
+          <span className="text-5xl font-medium tracking-[-0.04em] md:text-7xl">
             Manuel Sanchez
           </span>
         </div>
@@ -15,7 +15,7 @@ export function CvFooter() {
         <div className="flex flex-col items-center gap-4 border-t border-border/20 py-6 md:flex-row md:justify-between">
           <span className="text-sm text-muted-foreground">
             {new Date().getFullYear()} &copy; Manuel Sanchez — Fullstack
-            Developer · React, Next.js, Node · Santo Domingo, UTC−4
+            Developer · React, React Native, Node, AI · Santo Domingo, UTC−4
           </span>
 
           <div className="flex items-center gap-6">

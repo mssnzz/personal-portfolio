@@ -147,7 +147,7 @@ function Panel({ children }: { children: React.ReactNode }) {
 function Header({ total }: { total?: number }) {
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-      <h3 className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
+      <h3 className="font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground">
         Commit activity — last 12 months
       </h3>
       <a
@@ -171,7 +171,7 @@ export async function GithubContributions() {
     return (
       <Panel>
         <Header />
-        <p className="mt-4 text-sm text-muted-foreground/60">
+        <p className="mt-4 text-sm text-muted-foreground">
           The contribution graph is unavailable right now — it lives on the
           profile above.
         </p>
@@ -202,7 +202,7 @@ export async function GithubContributions() {
             {labels.map((label, i) => (
               <span
                 key={i}
-                className="font-mono text-[10px] whitespace-nowrap text-muted-foreground/60"
+                className="font-mono text-[10px] whitespace-nowrap text-muted-foreground"
               >
                 {label}
               </span>
@@ -237,13 +237,13 @@ export async function GithubContributions() {
       </div>
 
       <div className="mt-4 flex items-center gap-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground/60">
+        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
           Less
         </span>
         {LEVEL_FILL.map((fill, i) => (
           <span key={i} className="size-[11px]" style={{ background: fill }} />
         ))}
-        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground/60">
+        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
           More
         </span>
       </div>

@@ -291,3 +291,12 @@
     break-inside: avoid;
   }
 }
+
+/* Text set over the hero's dithered portrait: a soft glow in the page colour
+   clears the marks directly behind each glyph without boxing the line in. */
+.pf-halo {
+  text-shadow:
+    0 0 6px var(--background),
+    0 0 14px var(--background),
+    0 0 24px var(--background);
+}
